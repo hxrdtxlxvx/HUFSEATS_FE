@@ -19,17 +19,22 @@
 
 ---
 
-## 📁 프로젝트 구조 (예시)
+## 📁 프로젝트 구조
 
-\`\`\`
-src/
-├── components/       # 재사용 UI 컴포넌트
-├── pages/            # 각 라우트 페이지
-├── assets/           # 이미지, 아이콘
-├── App.jsx
-├── main.jsx
-└── index.css         # Tailwind 설정
-\`\`\`
+```
+HUFSEATS_FE/
+├── public/
+│   └── list.txt           # 맛집 데이터 텍스트 파일
+├── src/
+│   ├── assets/            # 이미지, 아이콘 등 정적 파일
+│   ├── components/        # 재사용 UI 컴포넌트 (Header 등)
+│   ├── pages/             # 각 라우트 페이지 (Roulette.jsx 등)
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css          # Tailwind 설정
+├── package.json
+└── README.md
+```
 
 ---
 
@@ -42,6 +47,6 @@ src/
 
 | 이름 | 역할 |
 |------|------|
-| <a href="https://github.com/hxrdtxlxvx"><img src="https://avatars.githubusercontent.com/hxrdtxlxvx" width="100px;" alt="hxrdtxlxvx"/><br />hxrdtxlxvx</a> | 프론트엔드 개발, 기획 |
+| <a href="https://github.com/hxrdtxlxvx"><img src="https://avatars.githubusercontent.com/hxrdtxlxvx" width="100px;" alt="hxrdtxlxvx"/><br />김민주</a> | 프론트엔드 개발, 기획 |
 
 ---
