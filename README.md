@@ -47,6 +47,6 @@ HUFSEATS_FE/
 
 | 이름 | 역할 |
 |------|------|
-| <a href="https://github.com/hxrdtxlxvx"><img src="https://avatars.githubusercontent.com/hxrdtxlxvx" width="100px;" alt="hxrdtxlxvx"/><br />김민주</a> | 프론트엔드 개발, 기획 |
+| <div align="center"><a href="https://github.com/hxrdtxlxvx"><img src="https://avatars.githubusercontent.com/hxrdtxlxvx" width="100px;" alt="hxrdtxlxvx"/><br /><b>김민주</b></a></div> | 프론트엔드 개발, 기획 |
 
 ---
