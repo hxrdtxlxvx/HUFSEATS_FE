@@ -41,10 +41,37 @@ export default function Map() {
       };
       const map = new window.kakao.maps.Map(container, options);
 
-      const marker = new window.kakao.maps.Marker({
-        position: new window.kakao.maps.LatLng(37.596833, 127.058521),
-      });
-      marker.setMap(map);
+      // coordinates.json에서 여러 마커와 정보창 표시
+      fetch("/coordinates.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const bounds = new window.kakao.maps.LatLngBounds();
+
+          data.forEach((place) => {
+            const position = new window.kakao.maps.LatLng(place.lat, place.lng);
+            const marker = new window.kakao.maps.Marker({ position });
+            marker.setMap(map);
+
+            bounds.extend(position);
+
+            const infoWindow = new window.kakao.maps.InfoWindow({
+              content: `<div style="padding:8px; font-size:14px;">${place.name}<br/>${place.description}</div>`,
+            });
+
+            let infoOpen = false;
+            window.kakao.maps.event.addListener(marker, "click", () => {
+              if (infoOpen) {
+                infoWindow.close();
+              } else {
+                infoWindow.open(map, marker);
+              }
+              infoOpen = !infoOpen;
+            });
+          });
+
+          // 모든 마커가 보이도록 지도 범위 자동 조절
+          map.setBounds(bounds);
+        });
     }
   }, []);
 
