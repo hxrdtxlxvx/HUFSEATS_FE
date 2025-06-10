@@ -17,7 +17,9 @@ function App() {
             <Route path="/" element={
               <>
                 <Roulette />
-                <Notice />
+                <div className="pb-4">
+                  <Notice />
+                </div>
               </>
             } />
             <Route path="/map" element={<Map />} />
