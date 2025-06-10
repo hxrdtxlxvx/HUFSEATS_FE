@@ -34,6 +34,11 @@ export default function Header() {
         >
           <ul className="px-4 py-2 space-y-2">
             <li>
+              <Link to="/" onClick={handleMenuClick}>
+                🏠 홈
+              </Link>
+            </li>
+            <li>
               <Link to="/map" onClick={handleMenuClick}>
                 🗺️ 지도에서 보기
               </Link>
