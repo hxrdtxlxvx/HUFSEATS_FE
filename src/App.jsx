@@ -4,6 +4,7 @@ import Roulette from './pages/Roulette.jsx'
 import Header from './components/Header.jsx'
 import Map from './pages/Map.jsx'
 import Notice from './components/Notice.jsx'
+import List from './pages/List.jsx'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               </>
             } />
             <Route path="/map" element={<Map />} />
+            <Route path="/list" element={<List />} />
           </Routes>
         </div>
       </div>
