@@ -1,12 +1,22 @@
-# React + Vite
+# HUFSEATS 🍜
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+한국외대~경희대 근처 맛집을 기록하고, 룰렛으로 메뉴를 랜덤 추천받는 모바일 전용 웹 애플리케이션.
 
-Currently, two official plugins are available:
+## 🚀 기술 스택
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React, Vite, JavaScript
+- **Styling**: TailwindCSS
+- **Deployment**: Vercel
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📱 주요 기능
+
+- 🔁 오늘 뭐 먹지? 메뉴 룰렛
+- 🍽️ 사용자 등록 맛집 리스트
+- 🗺️ 지도 기반 전체 맛집 보기 (미구현)
+- 📝 후기 작성 및 열람 (미구현)
+
+---
+
+## 📁 프로젝트 구조 (예시)
