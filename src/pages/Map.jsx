@@ -54,18 +54,50 @@ export default function Map() {
 
             bounds.extend(position);
 
-            const infoWindow = new window.kakao.maps.InfoWindow({
-              content: `<div style="padding:8px; font-size:14px;">${place.name}<br/>${place.description}</div>`,
+            // InfoWindow 대신 CustomOverlay 사용
+            const content = document.createElement("div");
+            content.className = "custom-overlay";
+            content.innerHTML = `
+              <div style="
+                padding: 8px;
+                font-size: 13px;
+                text-align: center;
+                background-color: #e6f4ff;
+                border-radius: 8px;
+                width: auto; /* 텍스트에 맞게 자동 조절 */
+                min-width: 50px; /* 최소 너비 */
+                max-width: 200px; /* 최대 너비 */
+                white-space: nowrap; /* 텍스트가 한 줄로 */
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                position: relative;
+                cursor: pointer; /* 클릭 가능함을 표시 */
+              ">
+                <strong style="display: block; margin-bottom: 2px; font-size: 13px;">${place.name}</strong>
+                <span style="font-size: 11px;">${place.description}</span>
+              </div>
+            `;
+
+            const customOverlay = new window.kakao.maps.CustomOverlay({
+              position: position,
+              content: content,
+              yAnchor: 1.3,  // 말풍선이 마커 위에 오도록 조정
             });
 
-            let infoOpen = false;
+            // 말풍선 클릭 이벤트 추가
+            content.addEventListener('click', () => {
+              customOverlay.setMap(null);
+              isOverlayOpen = false;
+            });
+
+            // 마커 클릭 이벤트
+            let isOverlayOpen = false;
             window.kakao.maps.event.addListener(marker, "click", () => {
-              if (infoOpen) {
-                infoWindow.close();
+              if (isOverlayOpen) {
+                customOverlay.setMap(null);  // 오버레이 제거로 닫기
               } else {
-                infoWindow.open(map, marker);
+                customOverlay.setMap(map);   // 오버레이 맵에 추가로 열기
               }
-              infoOpen = !infoOpen;
+              isOverlayOpen = !isOverlayOpen;
             });
           });
 
