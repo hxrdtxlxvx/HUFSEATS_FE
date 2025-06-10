@@ -5,6 +5,7 @@ import Header from './components/Header.jsx'
 import Map from './pages/Map.jsx'
 import Notice from './components/Notice.jsx'
 import List from './pages/List.jsx'
+import Board from './pages/Board.jsx'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             } />
             <Route path="/map" element={<Map />} />
             <Route path="/list" element={<List />} />
+            <Route path="/board" element={<Board />} />
           </Routes>
         </div>
       </div>

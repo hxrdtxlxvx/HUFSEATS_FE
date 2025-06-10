@@ -50,7 +50,7 @@ export default function Header() {
             </li>
             <li>
               <Link to="/board" onClick={handleMenuClick}>
-                📝 후기 게시판
+                📝 한 줄 게시판
               </Link>
             </li>
           </ul>
