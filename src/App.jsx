@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import './App.css'
+import Roulette from './pages/Roulette.jsx'
+import Header from './components/Header.jsx'
 
 function App() {
-  
   return (
     <>
-      <div className ="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        Setting up Tailwind CSS with Vite
+      <div>
+        <Header />
+        <div className="pt-12">
+          <Roulette />
+        </div>
       </div>
     </>
   )
