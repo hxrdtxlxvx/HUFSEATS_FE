@@ -6,6 +6,7 @@ import Map from './pages/Map.jsx'
 import Notice from './components/Notice.jsx'
 import List from './pages/List.jsx'
 import Board from './pages/Board.jsx'
+import Footer from './components/Footer.jsx'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/board" element={<Board />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );
