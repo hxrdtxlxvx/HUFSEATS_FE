@@ -49,7 +49,7 @@ export default function Map() {
         .then((data) => {
           const bounds = new window.kakao.maps.LatLngBounds();
           let selectedRestaurantMarker = null;
-          let selectedRestaurantInfo = null;
+          let selectedRestaurantOverlay = null;
 
           data.forEach((place) => {
             const position = new window.kakao.maps.LatLng(place.lat, place.lng);
@@ -58,51 +58,69 @@ export default function Map() {
 
             bounds.extend(position);
 
-            const infoWindow = new window.kakao.maps.InfoWindow({
-              content: `<div style="
-                padding: 10px; 
-                font-size: 14px; 
-                text-align: center; 
-                background-color: #e6f4ff; 
-                border-radius: 8px; 
-                width: 150px;
-                margin: 0 auto;
-                line-height: 1.5;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            // 커스텀 오버레이 생성
+            const content = document.createElement("div");
+            content.className = "custom-overlay";
+            content.innerHTML = `
+              <div style="
+                padding: 8px;
+                font-size: 13px;
+                text-align: center;
+                background-color: #e6f4ff;
+                border-radius: 8px;
+                width: auto; /* 텍스트에 맞게 자동 조절 */
+                min-width: 50px; /* 최소 너비 */
+                max-width: 200px; /* 최대 너비 */
+                white-space: nowrap; /* 텍스트가 한 줄로 */
+                position: relative;
+                cursor: pointer; /* 클릭 가능함을 표시 */
               ">
-                <strong style="display: block; margin-bottom: 4px;">${place.name}</strong>
-                <span>${place.description || ""}</span>
+                <strong style="display: block; margin-bottom: 2px; font-size: 13px;">${place.name}</strong>
+                <span style="font-size: 11px;">${place.description || ""}</span>
               </div>
-              `,
-              removable: true
+            `;
+
+            const customOverlay = new window.kakao.maps.CustomOverlay({
+              position: position,
+              content: content,
+              yAnchor: 1.3,  // 말풍선이 마커 위에 오도록 조정
             });
 
-            let infoOpen = false;
+            // 오버레이 토글을 위한 상태 변수
+            let isOverlayOpen = false;
+            
+            // 마커 클릭 이벤트 - 오버레이 토글
             window.kakao.maps.event.addListener(marker, "click", () => {
-              if (infoOpen) {
-                infoWindow.close();
+              if (isOverlayOpen) {
+                customOverlay.setMap(null); // 오버레이 숨기기
               } else {
-                infoWindow.open(map, marker);
+                customOverlay.setMap(map);  // 오버레이 표시
               }
-              infoOpen = !infoOpen;
+              isOverlayOpen = !isOverlayOpen;
+            });
+            
+            // 오버레이 클릭 시 닫히도록 설정
+            content.addEventListener('click', () => {
+              customOverlay.setMap(null);
+              isOverlayOpen = false;
             });
 
-            // 선택된 식당과 일치하면 이 마커와 정보창을 저장
+            // 선택된 식당과 일치하면 이 마커와 오버레이를 저장
             if (selectedRestaurantName && place.name === selectedRestaurantName) {
               selectedRestaurantMarker = marker;
-              selectedRestaurantInfo = infoWindow;
+              selectedRestaurantOverlay = customOverlay;
             }
           });
 
           // 모든 마커가 보이도록 지도 범위 자동 조절
           map.setBounds(bounds);
 
-          // 선택된 식당이 있으면 지도 중앙에 표시하고 정보창 열기
-          if (selectedRestaurantMarker && selectedRestaurantInfo) {
+          // 선택된 식당이 있으면 지도 중앙에 표시하고 오버레이 열기
+          if (selectedRestaurantMarker && selectedRestaurantOverlay) {
             setTimeout(() => {
               map.setCenter(selectedRestaurantMarker.getPosition());
               map.setLevel(2);  // 더 가까이 확대
-              selectedRestaurantInfo.open(map, selectedRestaurantMarker);
+              selectedRestaurantOverlay.setMap(map);  // 오버레이 표시
             }, 500);
           }
         });
