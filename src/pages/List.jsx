@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedMenus, setSelectedMenus] = useState([]);
+  const navigate = useNavigate();
   
   const locationList = ["정문", "후문", "회기"];
   const menuList = ["한식", "중식", "일식", "양식", "분식", "기타"];
@@ -70,6 +72,11 @@ const List = () => {
     );
   };
 
+  // 식당 클릭 처리 - 지도로 이동
+  const handleRestaurantClick = (restaurantName) => {
+    navigate(`/map?restaurant=${encodeURIComponent(restaurantName)}`);
+  };
+
   return (
     <div className="pt-4 px-4">
       <h2 className="text-lg font-bold mb-4 text-center">📋 전체 데이터 보기</h2>
@@ -130,7 +137,21 @@ const List = () => {
           <ul className="divide-y divide-gray-200">
             {filteredData.map((item, index) => (
               <li key={index} className="py-3 text-center">
-                <div className="font-medium">{item.name}</div>
+                {/* 클릭 가능한 제목 */}
+                <div className="inline-block relative group"> {/* inline-block으로 변경하여 내용 크기만큼만 영역 차지 */}
+                  <span
+                    className="cursor-pointer font-medium hover:text-blue-600 transition-colors"
+                    onClick={() => handleRestaurantClick(item.name)}
+                  >
+                    {item.name}
+                  </span>
+                  
+                  {/* 툴팁 - 호버 시 표시되는 안내 */}
+                  <span className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                    지도에서 보기
+                  </span>
+                </div>
+                
                 <div className="flex gap-2 text-sm mt-1 justify-center">
                   {/* 위치에 따른 색상 차별화 */}
                   <span className={`px-2 py-0.5 rounded text-xs ${
