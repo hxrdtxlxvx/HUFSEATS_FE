@@ -128,7 +128,7 @@ export default function Map() {
   }, [selectedRestaurantName]);
 
   return (
-    <div className="pt-14 px-4">
+    <div className="pt-4 px-4">
       <h2 className="text-lg font-bold mb-4 text-center">📍 지도에서 보기</h2>
       <div id="map" className="w-full h-[500px] rounded-md shadow border" />
     </div>
