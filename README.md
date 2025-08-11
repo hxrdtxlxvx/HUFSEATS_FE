@@ -6,7 +6,7 @@
 
 - **Frontend**: React, Vite, JavaScript
 - **Styling**: TailwindCSS
-- **Deployment**: GitHub Pages
+- **Deployment**: Vercel
 
 ---
 
