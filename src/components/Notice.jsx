@@ -7,7 +7,7 @@ const Notice = () => {
         알림
       </h3>
       <div className="text-sm mt-3 text-gray-600 space-y-2">
-        <p>마지막 수정: 25.06.11</p>
+        <p>마지막 수정: 25.08.15</p>
         <p>직접 가 본 곳 위주로 작성했습니다.</p>
       </div>
     </div>
